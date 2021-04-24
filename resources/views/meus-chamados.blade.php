@@ -19,8 +19,8 @@ body {
     background: #fff;
     padding: 20px 25px;
     border-radius: 3px;
-    min-width: 1000px;a
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    min-width: 1000px;
+    a box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 }
 
 .table-title {
@@ -113,11 +113,7 @@ table.table td a:hover {
 }
 
 table.table td a.edit {
-    color: #FFC107;
-}
-
-table.table td a.delete {
-    color: #F44336;
+    color: #000000;
 }
 
 table.table td i {
@@ -128,46 +124,6 @@ table.table .avatar {
     border-radius: 50%;
     vertical-align: middle;
     margin-right: 10px;
-}
-
-.pagination {
-    float: right;
-    margin: 0 0 5px;
-}
-
-.pagination li a {
-    border: none;
-    font-size: 13px;
-    min-width: 30px;
-    min-height: 30px;
-    color: #999;
-    margin: 0 2px;
-    line-height: 30px;
-    border-radius: 2px !important;
-    text-align: center;
-    padding: 0 6px;
-}
-
-.pagination li a:hover {
-    color: #666;
-}
-
-.pagination li.active a,
-.pagination li.active a.page-link {
-    background: #03A9F4;
-}
-
-.pagination li.active a:hover {
-    background: #0397d6;
-}
-
-.pagination li.disabled i {
-    color: #ccc;
-}
-
-.pagination li i {
-    font-size: 16px;
-    padding-top: 6px
 }
 
 .hint-text {
@@ -311,14 +267,8 @@ $(document).ready(function() {
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <h2>Gerenciar vendedores</h2>
-                    </div>
-                    <div class="col-sm-6">
-                        <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i
-                                class="material-icons">&#xE147;</i> <span>Adicionar Novo Vendedor</span></a>
-                        <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i
-                                class="material-icons">&#xE15C;</i> <span>Deletar</span></a>
+                    <div class="col-sm-12">
+                        <h2>Gerenciar meus chamados</h2>
                     </div>
                 </div>
             </div>
@@ -342,7 +292,7 @@ $(document).ready(function() {
                     </tr>
                 </thead>
                 <tbody>
-                   <?php
+                    <?php
                    $vendedores = Vendedor::all();
                    if (!empty($vendedores)){
                        foreach ($vendedores as $vendedor){
@@ -361,15 +311,12 @@ $(document).ready(function() {
                            <td>".$vendedor->chamados_em_atendimento."</td>
                            <td>".$vendedor->chamados_resolvidos."</td>
                            <td>
-                            <a href='#editEmployeeModal' class='edit' data-toggle='modal'><i class='material-icons'
-                                    data-toggle='tooltip' title='Edit'>&#xE254;</i></a>
-                            <a href='#deleteEmployeeModal' class='delete' data-toggle='modal'><i class='material-icons'
-                                    data-toggle='tooltip' title='Delete'>&#xE872;</i></a>
+                            <a href='#editEmployeeModal' class='edit' data-toggle='modal'><i class='material-icons'>assignment_turned_in</i></a>
                         </td>");
                        }
                    }
                    ?>
-                    
+
                 </tbody>
             </table>
         </div>
@@ -380,7 +327,7 @@ $(document).ready(function() {
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="/post-vendedor" method="POST">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="modal-header">
                     <h4 class="modal-title">Adicionar Vendedor</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -406,7 +353,7 @@ $(document).ready(function() {
                 <div class="modal-footer">
                     <input type="hidden" name="chamados_abertos" value="0">
                     <input type="hidden" name="chamados_em_atendimento" value="0">
-                    <input type="hidden" name="chamados_resolvidos"  value="0">
+                    <input type="hidden" name="chamados_resolvidos" value="0">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
                     <input type="submit" class="btn btn-success" value="Adicionar">
                 </div>
@@ -418,8 +365,8 @@ $(document).ready(function() {
 <div id="editEmployeeModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-        <form action="/update-vendedor" method="POST">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            <form action="/update-vendedor" method="POST">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="modal-header">
                     <h4 class="modal-title">Editar Vendedor</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

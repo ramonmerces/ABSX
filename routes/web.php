@@ -15,13 +15,22 @@ use App\Http\Controllers\Api\VendedoresController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 Route::get('/teste', function (){
     return view('teste');
 });
 Route::get('/cadastro-vendedor', function (){
     return view('cadastro-vendedor');
+});
+Route::get('/cadastro-chamado', function (){
+    return view('cadastro-chamado');
+});
+Route::get('/crud-chamado', function (){
+    return view('crud-chamado');
+});
+Route::get('/meus-chamados', function (){
+    return view('meus-chamados');
 });
 Auth::routes();
 Route::group(['middleware' => ['web']], function () {

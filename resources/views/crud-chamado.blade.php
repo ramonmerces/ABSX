@@ -19,8 +19,8 @@ body {
     background: #fff;
     padding: 20px 25px;
     border-radius: 3px;
-    min-width: 1000px;a
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    min-width: 1000px;
+    a box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 }
 
 .table-title {
@@ -312,7 +312,7 @@ $(document).ready(function() {
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2>Gerenciar vendedores</h2>
+                        <h2>Gerenciar chamados</h2>
                     </div>
                     <div class="col-sm-6">
                         <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i
@@ -342,7 +342,7 @@ $(document).ready(function() {
                     </tr>
                 </thead>
                 <tbody>
-                   <?php
+                    <?php
                    $vendedores = Vendedor::all();
                    if (!empty($vendedores)){
                        foreach ($vendedores as $vendedor){
@@ -369,7 +369,7 @@ $(document).ready(function() {
                        }
                    }
                    ?>
-                    
+
                 </tbody>
             </table>
         </div>
@@ -380,7 +380,7 @@ $(document).ready(function() {
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="/post-vendedor" method="POST">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="modal-header">
                     <h4 class="modal-title">Adicionar Vendedor</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -406,7 +406,7 @@ $(document).ready(function() {
                 <div class="modal-footer">
                     <input type="hidden" name="chamados_abertos" value="0">
                     <input type="hidden" name="chamados_em_atendimento" value="0">
-                    <input type="hidden" name="chamados_resolvidos"  value="0">
+                    <input type="hidden" name="chamados_resolvidos" value="0">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
                     <input type="submit" class="btn btn-success" value="Adicionar">
                 </div>
@@ -418,8 +418,8 @@ $(document).ready(function() {
 <div id="editEmployeeModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-        <form action="/update-vendedor" method="POST">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            <form action="/update-vendedor" method="POST">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="modal-header">
                     <h4 class="modal-title">Editar Vendedor</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
