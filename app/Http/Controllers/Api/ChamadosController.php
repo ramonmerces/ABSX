@@ -5,14 +5,13 @@ namespace App\Http\Controllers\Api;
 use App\Models\Post;
 use Orion\Http\Controllers\Controller;
 use Orion\Concerns\DisableAuthorization;
-use App\Models\Vendedor;
+use App\Models\Chamado;
 use Auth;
 
-class VendedoresController extends Controller
+class ChamadosController extends Controller
 {
-    //use DisableAuthorization;
-    
-    protected $model = Vendedor::class; 
+   // use DisableAuthorization;
+    protected $model = Chamado::class; 
     public function resolveUser()
     {
         return Auth::guard('sanctum')->user();

@@ -21,7 +21,7 @@ use App\Http\Controllers\Api\ChamadosController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::group(['as' => 'api.'], function() {
-    Orion::resource('vendedores', VendedoresApiController::class);
-    Orion::resource('chamados', ChamadosApiController::class);
+Route::middleware('auth:sanctum')->group(function() {
+    Orion::resource('vendedores', VendedoresController::class);
+    Orion::resource('chamados', ChamadosController::class);
 });
