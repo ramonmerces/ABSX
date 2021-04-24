@@ -25,3 +25,4 @@ Route::middleware('auth:sanctum')->group(function() {
     Orion::resource('vendedores', VendedoresController::class);
     Orion::resource('chamados', ChamadosController::class);
 });
+//Route::post('postview', VendedoresController@storeview );

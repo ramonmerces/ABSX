@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\VendedoresController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,13 @@ Route::get('/', function () {
 Route::get('/teste', function (){
     return view('teste');
 });
+Route::get('/cadastro-vendedor', function (){
+    return view('cadastro-vendedor');
+});
 Auth::routes();
+Route::group(['middleware' => ['web']], function () {
+    Route::post('post-vendedor', 'App\Http\Controllers\Api\VendedoresController@store');
+    Route::post('update-vendedor', 'App\Http\Controllers\Api\VendedoresController@updateview');
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

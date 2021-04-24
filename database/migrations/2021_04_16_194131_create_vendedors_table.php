@@ -16,6 +16,7 @@ class CreateVendedorsTable extends Migration
         Schema::create('vendedors', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
+            $table->string('email');
             $table->string('telefone');
             $table->string('status');
             $table->integer('chamados_abertos');
