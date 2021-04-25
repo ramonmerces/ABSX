@@ -402,40 +402,28 @@ $(document).ready(function() {
 <div id="editChamadoModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/update-vendedor" method="POST">
+            <form action="/update-chamado" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="modal-header">
-                    <h4 class="modal-title">Editar Vendedor</h4>
+                    <h4 class="modal-title">Editar Chamado</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Nome:</label>
-                        <input type="text" class="form-control" required>
+                        <label>Assunto:</label>
+                        <input type="text" name="assunto" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Email:</label>
-                        <input type="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Telefone:</label>
-                        <input class="form-control" required></input>
+                        <label>Descrição:</label>
+                        <input type="text" name="descricao" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Status:</label>
-                        <input type="text" class="form-control" required>
+                        <input class="form-control" name="status" required></input>
                     </div>
                     <div class="form-group">
-                        <label>Chamados em aberto:</label>
-                        <input type="text" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Chamados em andamento:</label>
-                        <input type="text" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Chamados resolvidos:</label>
-                        <input type="text" class="form-control" required>
+                        <label>Data Criação:</label>
+                        <input type="text" name="created_at" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -456,7 +444,7 @@ $(document).ready(function() {
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>Tem certeza que quer deletar estes Vendedores?</p>
+                    <p>Tem certeza que quer deletar estes Chamados??</p>
                     <p class="text-warning"><small>Esta ação não pode ser desfeita!</small></p>
                 </div>
                 <div class="modal-footer">

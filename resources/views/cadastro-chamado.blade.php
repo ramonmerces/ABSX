@@ -87,10 +87,12 @@ button.btn {
                     </div>
                 </div>
             </div>
-            <form>
+            <form action="/post-chamado" method="POST">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            <input type="hidden" name="status" value="aberto">
                 <div class="form-group">
                     <label for="assunto">Assunto</label>
-                    <input class="form-control" type="text" placeholder="Informe o assunto do chamado">
+                    <input class="form-control" type="text" name="assunto" placeholder="Informe o assunto do chamado">
                 </div>
 
                 <div class="form-group">

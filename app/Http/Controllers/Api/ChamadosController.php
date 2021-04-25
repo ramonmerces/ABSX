@@ -35,6 +35,31 @@ class ChamadosController extends Controller
         }
         return view('crud-chamado');
    }
+   public function updateView(Request $request){
+        if(!empty($request)){
+            $input = $request->all();
+            $chamado = Chamado::find($input['id']);
+            $chamado->assunto = $input['assunto'];
+            $chamado->descricao = $input['descricao'];
+            $chamado->status = $input['status'];
+            $chamado->created_at = $input['created_at'];
+            $chamado->save();
+
+
+        }
+        return view('crud-chamado');
+   }
+   public function deleteView(Request $request){
+        if(!empty($request)){
+            $input = $request->all();
+            $chamado = Chamado::find($input['id']);
+            $chamado->delete();
+            
+        }
+        return view('crud-chamado'); 
+   }    
+
+
     protected $model = Chamado::class; 
     public function resolveUser()
     {

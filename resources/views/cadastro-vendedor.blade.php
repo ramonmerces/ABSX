@@ -77,7 +77,7 @@ table.table tr th:first-child {
 }
 
 table.table tr th:last-child {
-    width: 100px;
+    width: 150px;
 }
 
 table.table-striped tbody tr:nth-of-type(odd) {
@@ -361,6 +361,7 @@ $(document).ready(function() {
                            <td>".$vendedor->chamados_em_atendimento."</td>
                            <td>".$vendedor->chamados_resolvidos."</td>
                            <td>
+                           <a href='/meus-chamados' class='vendedor'><i class='material-icons'>assignment_ind</i></a>
                             <a href='#editEmployeeModal' class='edit' data-toggle='modal'><i class='material-icons'
                                     data-toggle='tooltip' title='Edit'>&#xE254;</i></a>
                             <a href='#deleteEmployeeModal' class='delete' data-toggle='modal'><i class='material-icons'

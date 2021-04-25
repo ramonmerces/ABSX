@@ -48,6 +48,17 @@ class VendedoresController extends Controller
        return view('cadastro-vendedor');
     }
 
+    public function deleteView(Request $request)
+    {
+        if(!empty($request)){
+            $input = $request->all();
+            $vendedor = Vendedor::find($input['id']);
+            $vendedor->delete();
+            
+        }
+        return view('cadastro-vendedor');
+    }
+    
     
     protected $model = Vendedor::class; 
     public function resolveUser()

@@ -37,6 +37,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('post-vendedor', 'App\Http\Controllers\Api\VendedoresController@store');
     Route::post('update-vendedor', 'App\Http\Controllers\Api\VendedoresController@updateview');
     Route::post('post-chamado', 'App\Http\Controllers\Api\ChamadosController@store');
+    Route::post('update-chamado', 'App\Http\Controllers\Api\ChamadosController@updateView');
+    Route::post('delete-vendedor','App\Http\Controllers\Api\VendedoresController@deleteView');
+    Route::post('delete-chamado', 'App\Http\Controllers\Api\ChamadosController@deleteView');
+
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

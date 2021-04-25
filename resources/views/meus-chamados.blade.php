@@ -1,4 +1,7 @@
-<?php use App\Models\Vendedor;?>
+<?php 
+use App\Models\Vendedor;
+use App\Models\Chamado;
+?>
 @extends('layouts.app')
 
 @section('content')
@@ -281,35 +284,29 @@ $(document).ready(function() {
                                 <label for="selectAll"></label>
                             </span>
                         </th>
-                        <th>Name</th>
-                        <th>Email</th>
+                        <th>Assunto</th>
+                        <th>Descrição</th>
                         <th>Status</th>
-                        <th>Telefone</th>
-                        <th>C. Abertos</th>
-                        <th>C. Atendimento</th>
-                        <th>C. Resolvidos</th>
+                        <th>Data de Abertura</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                   $vendedores = Vendedor::all();
-                   if (!empty($vendedores)){
-                       foreach ($vendedores as $vendedor){
+                   $chamados = Chamado::all();
+                   if (!empty($chamados)){
+                       foreach ($chamados as $chamado){
                            echo ("<tr>
                            <td>
                                <span class='custom-checkbox'>
-                                   <input type='checkbox' id=".$vendedor->id." name='options[]' value='1'>
+                                   <input type='checkbox' id=".$chamado->id." name=".$chamado->id." value='1'>
                                    <label for='checkbox1'></label>
                                </span>
                            </td>
-                           <td>".$vendedor->nome."</td>
-                           <td>".$vendedor->email."</td>
-                           <td>".$vendedor->status."</td>
-                           <td>".$vendedor->telefone."</td>
-                           <td>".$vendedor->chamados_abertos."</td>
-                           <td>".$vendedor->chamados_em_atendimento."</td>
-                           <td>".$vendedor->chamados_resolvidos."</td>
+                           <td>".$chamado->assunto."</td>
+                           <td>".$chamado->descricao."</td>
+                           <td>".$chamado->status."</td>
+                           <td>".$chamado->created_at."</td>
                            <td>
                             <a href='#editEmployeeModal' class='edit' data-toggle='modal'><i class='material-icons'>assignment_turned_in</i></a>
                         </td>");
@@ -365,40 +362,20 @@ $(document).ready(function() {
 <div id="editEmployeeModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/update-vendedor" method="POST">
+            <form action="/update-chamado" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="modal-header">
-                    <h4 class="modal-title">Editar Vendedor</h4>
+                    <h4 class="modal-title">Atualizar Chamado</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>Nome:</label>
-                        <input type="text" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email:</label>
-                        <input type="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Telefone:</label>
-                        <input class="form-control" required></input>
-                    </div>
+                    
                     <div class="form-group">
                         <label>Status:</label>
-                        <input type="text" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Chamados em aberto:</label>
-                        <input type="text" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Chamados em andamento:</label>
-                        <input type="text" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Chamados resolvidos:</label>
-                        <input type="text" class="form-control" required>
+                        <select  class="form-control" required>
+                        <option>Aberto</option>
+                        <option>Em Atendimento</option>
+                        <option>Fechado</option>
                     </div>
                 </div>
                 <div class="modal-footer">
