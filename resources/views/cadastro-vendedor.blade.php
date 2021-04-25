@@ -427,31 +427,31 @@ $(document).ready(function() {
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Nome:</label>
-                        <input type="text" class="form-control" required>
+                        <input type="text" name="nome" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Email:</label>
-                        <input type="email" class="form-control" required>
+                        <input type="email" name="email" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Telefone:</label>
-                        <input class="form-control" required></input>
+                        <input class="form-control" name="telefone" required></input>
                     </div>
                     <div class="form-group">
                         <label>Status:</label>
-                        <input type="text" class="form-control" required>
+                        <input type="text" name="status" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Chamados em aberto:</label>
-                        <input type="text" class="form-control" required>
+                        <input type="text" name="chamados_abertos" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Chamados em andamento:</label>
-                        <input type="text" class="form-control" required>
+                        <input type="text" name="chamados_em_atendimento" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Chamados resolvidos:</label>
-                        <input type="text" class="form-control" required>
+                        <input type="text" name="chamados_resolvidos" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">

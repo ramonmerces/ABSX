@@ -36,6 +36,7 @@ Auth::routes();
 Route::group(['middleware' => ['web']], function () {
     Route::post('post-vendedor', 'App\Http\Controllers\Api\VendedoresController@store');
     Route::post('update-vendedor', 'App\Http\Controllers\Api\VendedoresController@updateview');
+    Route::post('post-chamado', 'App\Http\Controllers\Api\ChamadosController@store');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

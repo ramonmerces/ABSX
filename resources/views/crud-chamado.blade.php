@@ -1,4 +1,4 @@
-<?php use App\Models\Vendedor;?>
+<?php use App\Models\Chamado;?>
 @extends('layouts.app')
 
 @section('content')
@@ -315,8 +315,8 @@ $(document).ready(function() {
                         <h2>Gerenciar chamados</h2>
                     </div>
                     <div class="col-sm-6">
-                        <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i
-                                class="material-icons">&#xE147;</i> <span>Adicionar Novo Vendedor</span></a>
+                        <a href="#addChamadoModal" class="btn btn-success" data-toggle="modal"><i
+                                class="material-icons">&#xE147;</i> <span>Novo Chamado</span></a>
                         <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i
                                 class="material-icons">&#xE15C;</i> <span>Deletar</span></a>
                     </div>
@@ -331,37 +331,31 @@ $(document).ready(function() {
                                 <label for="selectAll"></label>
                             </span>
                         </th>
-                        <th>Name</th>
-                        <th>Email</th>
+                        <th>Assunto</th>
+                        <th>Descrição</th>
                         <th>Status</th>
-                        <th>Telefone</th>
-                        <th>C. Abertos</th>
-                        <th>C. Atendimento</th>
-                        <th>C. Resolvidos</th>
+                        <th>Data de Criação</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                   $vendedores = Vendedor::all();
-                   if (!empty($vendedores)){
-                       foreach ($vendedores as $vendedor){
+                   $chamados = Chamado::all();
+                   if (!empty($chamados)){
+                       foreach ($chamados as $chamado){
                            echo ("<tr>
                            <td>
                                <span class='custom-checkbox'>
-                                   <input type='checkbox' id=".$vendedor->id." name='options[]' value='1'>
+                                   <input type='checkbox' id=".$chamado->id." name='options[]' value='1'>
                                    <label for='checkbox1'></label>
                                </span>
                            </td>
-                           <td>".$vendedor->nome."</td>
-                           <td>".$vendedor->email."</td>
-                           <td>".$vendedor->status."</td>
-                           <td>".$vendedor->telefone."</td>
-                           <td>".$vendedor->chamados_abertos."</td>
-                           <td>".$vendedor->chamados_em_atendimento."</td>
-                           <td>".$vendedor->chamados_resolvidos."</td>
+                           <td>".$chamado->assunto."</td>
+                           <td>".$chamado->descricao."</td>
+                           <td>".$chamado->status."</td>
+                           <td>".$chamado->created_at."</td>
                            <td>
-                            <a href='#editEmployeeModal' class='edit' data-toggle='modal'><i class='material-icons'
+                            <a href='#editChamadoModal' class='edit' data-toggle='modal'><i class='material-icons'
                                     data-toggle='tooltip' title='Edit'>&#xE254;</i></a>
                             <a href='#deleteEmployeeModal' class='delete' data-toggle='modal'><i class='material-icons'
                                     data-toggle='tooltip' title='Delete'>&#xE872;</i></a>
@@ -376,37 +370,27 @@ $(document).ready(function() {
     </div>
 </div>
 <!-- Edit Modal HTML -->
-<div id="addEmployeeModal" class="modal fade">
+<div id="addChamadoModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/post-vendedor" method="POST">
+            <form action="/post-chamado" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="modal-header">
-                    <h4 class="modal-title">Adicionar Vendedor</h4>
+                    <h4 class="modal-title">Novo Chamado</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Nome</label>
-                        <input type="text" name="nome" class="form-control" required>
+                        <label>Assunto</label>
+                        <input type="text" name="assunto" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" name="email" class="form-control" required>
+                        <label>Descrição</label>
+                        <input type="text" name="descricao" class="form-control" required>
                     </div>
-                    <div class="form-group">
-                        <label>Telefone</label>
-                        <input class="form-control" name="telefone" required></input>
-                    </div>
-                    <div class="form-group">
-                        <label>Status</label>
-                        <input type="text" name="status" class="form-control" required>
-                    </div>
-                </div>
+        </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="chamados_abertos" value="0">
-                    <input type="hidden" name="chamados_em_atendimento" value="0">
-                    <input type="hidden" name="chamados_resolvidos" value="0">
+                    <input type="hidden" name="status" value="aberto">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
                     <input type="submit" class="btn btn-success" value="Adicionar">
                 </div>
@@ -415,7 +399,7 @@ $(document).ready(function() {
     </div>
 </div>
 <!-- Edit Modal HTML -->
-<div id="editEmployeeModal" class="modal fade">
+<div id="editChamadoModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="/update-vendedor" method="POST">
