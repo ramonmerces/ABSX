@@ -78,20 +78,23 @@ Salve o campo
 ## Crud Vendedor
 
 - [Crud vendedor](http://ramonmerces.xyz/cadastro-vendedor)
-- 
+
 ## Crud Chamado
 
 - [Crud Chamado](http://ramonmerces.xyz/crud-chamado)
--
 
 ## Soluções
 
 Ao fazer [login](http://ramonmerces.xyz/login) 
-- Usuario; 
-- Senha:
+- Usuario; joao.absx@mailinator.com
+- Senha: absx1234
+
+Existem 3 cards representam os cruds de chamados e vendedores e outro apresenta a visão sem auth para cadastro externo de chamados.
 
 ### Chamados Atrasados
 
-Existe uma rotina no scheduller do Laravel verificando a cada 5 minutos os chamados abertos e quando foram criados, caso a data de criação seja maior que 24hrs o status do chamado é alterado para Atrasado;
+Existe uma rotina no scheduller do Laravel verificando a cada 5 minutos os chamados abertos e quando foram criados, caso a data de criação seja maior que 24hrs o status do chamado é alterado para Atrasado.
 
 ### Chamados distribuidos para o consultor com menos chamados em aberto
+
+Ao criar um novo chamado atribui-se a ao consultor com menos chamados em aberto.
