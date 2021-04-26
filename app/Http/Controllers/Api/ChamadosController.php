@@ -22,16 +22,19 @@ class ChamadosController extends Controller
             $chamado->status = 'Aberto';
             
             $vendedores = Vendedor::all();
-            $Chamados_abertos = array();
+            $chamados_abertos = array();
             foreach ($vendedores as $vendedor){
-               array_push($chamados_abertos, $chamados_abertos[$vendedor->id] = $vendedor->chamados_abertos);
+               $chamados_abertos2["id".$vendedor->id] = $vendedor->chamados_abertos;
+               $farray = array_merge($chamados_abertos, $chamados_abertos2 );
+               
             }
-            asort($chamados_abertos);
-            $chamado->vendedor_id = key($chamados_abertos);
+            asort($farray);
+            $chamado->vendedor_id = substr(key($farray), 2);
             $vendedor = Vendedor::find($chamado->vendedor_id);
             $vendedor->chamados_abertos++; 
             $vendedor->save();
             $chamado->save();
+            
         }
         return view('crud-chamado');
    }

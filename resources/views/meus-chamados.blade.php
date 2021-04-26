@@ -240,7 +240,16 @@ table.table .avatar {
 </style>
 
 <script>
-$(document).ready(function() {
+jQuery(document).ready(function() {
+    $(document).on('click', '.edit', function() {
+        $('#id_form').val($(this).data('id'));
+        $('#id_status').val($(this).data('status'));
+    });
+    $(document).on('click', '.delete', function() {
+        $('#id_form_delet').val($(this).data('id'));
+        $('.email_user_delet').text($(this).data('email'));
+    });
+
     // Activate tooltip
     $('[data-toggle="tooltip"]').tooltip();
 
@@ -278,12 +287,6 @@ $(document).ready(function() {
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="selectAll">
-                                <label for="selectAll"></label>
-                            </span>
-                        </th>
                         <th>Assunto</th>
                         <th>Descrição</th>
                         <th>Status</th>
@@ -297,18 +300,16 @@ $(document).ready(function() {
                    if (!empty($chamados)){
                        foreach ($chamados as $chamado){
                            echo ("<tr>
-                           <td>
-                               <span class='custom-checkbox'>
-                                   <input type='checkbox' id=".$chamado->id." name=".$chamado->id." value='1'>
-                                   <label for='checkbox1'></label>
-                               </span>
-                           </td>
+                           
                            <td>".$chamado->assunto."</td>
                            <td>".$chamado->descricao."</td>
                            <td>".$chamado->status."</td>
                            <td>".$chamado->created_at."</td>
                            <td>
-                            <a href='#editEmployeeModal' class='edit' data-toggle='modal'><i class='material-icons'>assignment_turned_in</i></a>
+                            <a href='#editEmployeeModal' class='edit' data-toggle='modal'
+                            data-id=".$chamado->id."
+                            data-status=".$chamado->status."
+                            ><i class='material-icons'>assignment_turned_in</i></a>
                         </td>");
                        }
                    }
@@ -319,45 +320,7 @@ $(document).ready(function() {
         </div>
     </div>
 </div>
-<!-- Edit Modal HTML -->
-<div id="addEmployeeModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form action="/post-vendedor" method="POST">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                <div class="modal-header">
-                    <h4 class="modal-title">Adicionar Vendedor</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>Nome</label>
-                        <input type="text" name="nome" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" name="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Telefone</label>
-                        <input class="form-control" name="telefone" required></input>
-                    </div>
-                    <div class="form-group">
-                        <label>Status</label>
-                        <input type="text" name="status" class="form-control" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="hidden" name="chamados_abertos" value="0">
-                    <input type="hidden" name="chamados_em_atendimento" value="0">
-                    <input type="hidden" name="chamados_resolvidos" value="0">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-                    <input type="submit" class="btn btn-success" value="Adicionar">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+
 <!-- Edit Modal HTML -->
 <div id="editEmployeeModal" class="modal fade">
     <div class="modal-dialog">
@@ -369,15 +332,16 @@ $(document).ready(function() {
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
-                    
                     <div class="form-group">
                         <label>Status:</label>
-                        <select  class="form-control" required>
-                        <option>Aberto</option>
-                        <option>Em Atendimento</option>
-                        <option>Fechado</option>
+                        <select  class="form-control" id="id_status" name="status" required>
+                        <option value="Aberto">Aberto</option>
+                        <option value="Atendimento">Atendimento</option>
+                        <option value="Resolvido">Resolvido</option>
+                        </select>
                     </div>
                 </div>
+                
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
                     <input type="submit" class="btn btn-info" value="Save">

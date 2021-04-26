@@ -415,7 +415,10 @@ jQuery(document).ready(function() {
                     </div>
                     <div class="form-group">
                         <label>Status</label>
-                        <input type="text" name="status" class="form-control" required>
+                        <select  class="form-control" name="status"  required>>
+                            <option value="Ativo">Ativo</option>
+                            <option value="Inativo">Inativo</option>
+                            </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -457,7 +460,10 @@ jQuery(document).ready(function() {
                     </div>
                     <div class="form-group">
                         <label>Status:</label>
-                        <input type="text" name="status" id="id_status" class="form-control" required>
+                        <select  class="form-control" name="status" id="id_status" required>>
+                            <option value="Ativo">Ativo</option>
+                            <option value="Inativo">Inativo</option>
+                            </select>
                     </div>
                     <div class="form-group">
                         <label>Chamados em aberto:</label>

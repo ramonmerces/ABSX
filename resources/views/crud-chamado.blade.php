@@ -426,7 +426,12 @@ jQuery(document).ready(function() {
                     </div>
                     <div class="form-group">
                         <label>Status:</label>
-                        <input class="form-control" name="status" id="id_status" required></input>
+                        <select  class="form-control" name="status" id="id_status" required>>
+                            <option value="Aberto">Aberto</option>
+                            <option value="Atrasado">Atrasado</option>
+                            <option value="Atendimento">Atendimento</option>
+                            <option value="Resolvido">Resolvido</option> 
+                            </select>
                     </div>
                     <div class="form-group">
                         <label>Data Criação:</label>
