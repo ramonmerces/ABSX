@@ -9832,7 +9832,7 @@ a.text-info:hover, a.text-info:focus {
 }
 
 .text-warning {
-  color: #ffed4a !important;
+  color: var(--red) !important;
 }
 
 a.text-warning:hover, a.text-warning:focus {

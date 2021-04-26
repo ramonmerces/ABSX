@@ -32,6 +32,8 @@ Route::get('/crud-chamado', function (){
 Route::get('/meus-chamados', function (){
     return view('meus-chamados');
 });
+Route::get('/atrasados', 'App\Http\Controllers\Api\ChamadosController@atrasados' );
+
 Auth::routes();
 Route::group(['middleware' => ['web']], function () {
     Route::post('post-vendedor', 'App\Http\Controllers\Api\VendedoresController@store');

@@ -278,10 +278,28 @@ table.table .avatar {
 .modal form label {
     font-weight: normal;
 }
+.text-warning {
+    color: red;
+}
 </style>
 
 <script>
-$(document).ready(function() {
+jQuery(document).ready(function() {
+
+    $(document).on('click', '.edit', function() {
+        $('#id_form').val($(this).data('id'));
+        $('#id_nome').val($(this).data('nome'));
+        $('#id_email').val($(this).data('email'));
+        $('#id_status').val($(this).data('status'));
+        $('#id_telefone').val($(this).data('telefone'));
+        $('#id_chamados_abertos').val($(this).data('chamados_abertos'));
+        $('#id_chamados_em_atendimento').val($(this).data('chamados_em_atendimento'));
+        $('#id_chamados_resolvidos').val($(this).data('chamados_resolvidos'));
+    });
+    $(document).on('click', '.delete', function() {
+        $('#id_form_delet').val($(this).data('id'));
+        $('.email_user_delet').text($(this).data('email'));
+    });
     // Activate tooltip
     $('[data-toggle="tooltip"]').tooltip();
 
@@ -317,20 +335,12 @@ $(document).ready(function() {
                     <div class="col-sm-6">
                         <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i
                                 class="material-icons">&#xE147;</i> <span>Adicionar Novo Vendedor</span></a>
-                        <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i
-                                class="material-icons">&#xE15C;</i> <span>Deletar</span></a>
                     </div>
                 </div>
             </div>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="selectAll">
-                                <label for="selectAll"></label>
-                            </span>
-                        </th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Status</th>
@@ -347,11 +357,6 @@ $(document).ready(function() {
                    if (!empty($vendedores)){
                        foreach ($vendedores as $vendedor){
                            echo ("<tr>
-                           <td>
-                               <span class='custom-checkbox'>
-                                   <input type='checkbox' id=".$vendedor->id." name='options[]' value='1'>
-                                   <label for='checkbox1'></label>
-                               </span>
                            </td>
                            <td>".$vendedor->nome."</td>
                            <td>".$vendedor->email."</td>
@@ -361,10 +366,19 @@ $(document).ready(function() {
                            <td>".$vendedor->chamados_em_atendimento."</td>
                            <td>".$vendedor->chamados_resolvidos."</td>
                            <td>
-                           <a href='/meus-chamados' class='vendedor'><i class='material-icons'>assignment_ind</i></a>
-                            <a href='#editEmployeeModal' class='edit' data-toggle='modal'><i class='material-icons'
-                                    data-toggle='tooltip' title='Edit'>&#xE254;</i></a>
-                            <a href='#deleteEmployeeModal' class='delete' data-toggle='modal'><i class='material-icons'
+                           <a href=/meus-chamados/".$vendedor->id." class='vendedor'><i class='material-icons'>assignment_ind</i></a>
+                            <a href='#editEmployeeModal' class='edit' data-toggle='modal'
+                                data-id=".$vendedor->id."
+                                data-nome=".$vendedor->nome."
+                                data-email=".$vendedor->email."
+                                data-status=".$vendedor->status."
+                                data-telefone=".$vendedor->telefone."
+                                data-chamados_abertos=".$vendedor->chamados_abertos."
+                                data-chamados_em_atendimento=".$vendedor->chamados_em_atendimento."
+                                data-chamados_resolvidos=".$vendedor->chamados_resolvidos.">
+                            <i class='material-icons' data-toggle='tooltip' title='Edit'>&#xE254;</i>
+                            </a>
+                            <a href='#deleteEmployeeModal' class='delete' data-toggle='modal' data-id=".$vendedor->id." data-email=".$vendedor->email."><i class='material-icons'
                                     data-toggle='tooltip' title='Delete'>&#xE872;</i></a>
                         </td>");
                        }
@@ -427,32 +441,35 @@ $(document).ready(function() {
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                            <input type="hiden" name="id" id="id_form" class="form-control" required>
+                        </div>
+                    <div class="form-group">
                         <label>Nome:</label>
-                        <input type="text" name="nome" class="form-control" required>
+                        <input type="text" name="nome" id="id_nome" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Email:</label>
-                        <input type="email" name="email" class="form-control" required>
+                        <input type="email" name="email" id="id_email" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Telefone:</label>
-                        <input class="form-control" name="telefone" required></input>
+                        <input class="form-control" name="telefone" id="id_telefone" required></input>
                     </div>
                     <div class="form-group">
                         <label>Status:</label>
-                        <input type="text" name="status" class="form-control" required>
+                        <input type="text" name="status" id="id_status" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Chamados em aberto:</label>
-                        <input type="text" name="chamados_abertos" class="form-control" required>
+                        <input type="text" name="chamados_abertos" id="id_chamados_abertos" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Chamados em andamento:</label>
-                        <input type="text" name="chamados_em_atendimento" class="form-control" required>
+                        <input type="text" name="chamados_em_atendimento" id="id_chamados_em_atendimento" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Chamados resolvidos:</label>
-                        <input type="text" name="chamados_resolvidos" class="form-control" required>
+                        <input type="text" name="chamados_resolvidos" id="id_chamados_resolvidos" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -467,13 +484,18 @@ $(document).ready(function() {
 <div id="deleteEmployeeModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
+            <form action="/delete-vendedor" method="POST">
                 <div class="modal-header">
                     <h4 class="modal-title">Deletar Vendedores</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>Tem certeza que quer deletar estes Vendedores?</p>
+                    <div class="form-group">
+                        <input type="hidden" name="id" id="id_form_delet" class="form-control" required>
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    </div>
+                    <p>Tem certeza que quer deletar <strong><span class="email_user_delet" /></strong> dos Vendedores?
+                    </p>
                     <p class="text-warning"><small>Esta ação não pode ser desfeita!</small></p>
                 </div>
                 <div class="modal-footer">

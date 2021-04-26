@@ -281,7 +281,20 @@ table.table .avatar {
 </style>
 
 <script>
-$(document).ready(function() {
+jQuery(document).ready(function() {
+    $(document).on('click', '.edit', function() {
+        $('#id_form').val($(this).data('id'));
+        $('#id_assunto').val($(this).data('assunto'));
+        $('#id_descricao').val($(this).data('descricao'));
+        $('#id_status').val($(this).data('status'));
+        $('#id_created_at').val($(this).data('created_at'));
+    });
+    $(document).on('click', '.delete', function() {
+        $('#id_form_delet').val($(this).data('id'));
+        $('.email_user_delet').text($(this).data('email'));
+    });
+
+
     // Activate tooltip
     $('[data-toggle="tooltip"]').tooltip();
 
@@ -317,20 +330,13 @@ $(document).ready(function() {
                     <div class="col-sm-6">
                         <a href="#addChamadoModal" class="btn btn-success" data-toggle="modal"><i
                                 class="material-icons">&#xE147;</i> <span>Novo Chamado</span></a>
-                        <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i
-                                class="material-icons">&#xE15C;</i> <span>Deletar</span></a>
+                        
                     </div>
                 </div>
             </div>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="selectAll">
-                                <label for="selectAll"></label>
-                            </span>
-                        </th>
                         <th>Assunto</th>
                         <th>Descrição</th>
                         <th>Status</th>
@@ -344,20 +350,20 @@ $(document).ready(function() {
                    if (!empty($chamados)){
                        foreach ($chamados as $chamado){
                            echo ("<tr>
-                           <td>
-                               <span class='custom-checkbox'>
-                                   <input type='checkbox' id=".$chamado->id." name='options[]' value='1'>
-                                   <label for='checkbox1'></label>
-                               </span>
-                           </td>
                            <td>".$chamado->assunto."</td>
                            <td>".$chamado->descricao."</td>
                            <td>".$chamado->status."</td>
                            <td>".$chamado->created_at."</td>
                            <td>
-                            <a href='#editChamadoModal' class='edit' data-toggle='modal'><i class='material-icons'
+                            <a href='#editChamadoModal' class='edit' data-toggle='modal'
+                                data-id=".$chamado->id."
+                                data-assunto=".$chamado->assunto."
+                                data-status=".$chamado->status."
+                                data-descricao=".$chamado->descricao."
+                                data-created_at=".$chamado->created_at."
+                            ><i class='material-icons'
                                     data-toggle='tooltip' title='Edit'>&#xE254;</i></a>
-                            <a href='#deleteEmployeeModal' class='delete' data-toggle='modal'><i class='material-icons'
+                            <a href='#deleteEmployeeModal' class='delete' data-toggle='modal' data-id=".$chamado->id."><i class='material-icons'
                                     data-toggle='tooltip' title='Delete'>&#xE872;</i></a>
                         </td>");
                        }
@@ -410,20 +416,21 @@ $(document).ready(function() {
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                        <input type="hiden" name="id" id="id_form" class="form-control" required>
                         <label>Assunto:</label>
-                        <input type="text" name="assunto" class="form-control" required>
+                        <input type="text" name="assunto" id="id_assunto" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Descrição:</label>
-                        <input type="text" name="descricao" class="form-control" required>
+                        <input type="text" name="descricao" id="id_descricao"  class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Status:</label>
-                        <input class="form-control" name="status" required></input>
+                        <input class="form-control" name="status" id="id_status" required></input>
                     </div>
                     <div class="form-group">
                         <label>Data Criação:</label>
-                        <input type="text" name="created_at" class="form-control" required>
+                        <input type="text" name="created_at" id="id_created_at" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -438,13 +445,17 @@ $(document).ready(function() {
 <div id="deleteEmployeeModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
+            <form action="/delete-chamado" method="POST">
                 <div class="modal-header">
                     <h4 class="modal-title">Deletar Vendedores</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>Tem certeza que quer deletar estes Chamados??</p>
+                <div class="form-group">
+                        <input type="hidden" name="id" id="id_form_delet" class="form-control" required>
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    </div>
+                    <p>Tem certeza que quer deletar este Chamados?</p>
                     <p class="text-warning"><small>Esta ação não pode ser desfeita!</small></p>
                 </div>
                 <div class="modal-footer">

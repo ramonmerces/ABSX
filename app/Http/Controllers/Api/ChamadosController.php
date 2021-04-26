@@ -53,11 +53,43 @@ class ChamadosController extends Controller
         if(!empty($request)){
             $input = $request->all();
             $chamado = Chamado::find($input['id']);
+            $vendedor = Vendedor::find($chamado->vendedor_id);
+            if(!empty($vendedor)){
+                switch ($chamado->status) {
+                    case "Aberto":
+                        $vendedor->chamados_abertos--;
+                        break;
+                    case "Atrasado":
+                        $vendedor->chamados_abertos--;
+                        break;
+                    case "Em andamento":
+                        $vendedor->chamados_em_atendimento--;
+                        break;
+                    case "Resolvido":
+                        $vendedor->chamados_resolvidos--;
+                        break;    
+                }
+                $vendedor->save();
+            }
             $chamado->delete();
             
         }
         return view('crud-chamado'); 
    }    
+   public function atrasados(){
+    $d1 = new \DateTime();
+    $d1->sub(new \DateInterval('P1D'));
+    $chamados = Chamado::where('status', 'Aberto')
+                   ->where('created_at', '<' ,date_format($d1, 'Y-m-d'))
+                   ->get();
+               var_dump($chamados);     
+    
+            foreach ($chamados as $chamado){
+                $chamado->status = "Atrasado";
+                $chamado->save();
+        }
+    
+   }
 
 
     protected $model = Chamado::class; 
