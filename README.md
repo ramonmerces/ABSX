@@ -21,19 +21,28 @@ Rotas API - Sanctum api-key
 Clone o repositorio para o servidor de preferencia;
 
 Execute os comandos:
-- Composer install;
-- php artisan key:generate;
-- php artisan migrate;
+```bash
+Composer install;
+```
+```bash
+php artisan key:generate;
+```
+```bash
+php artisan migrate;
+```
 
 Para utilizar Rest é necessario gerar um token-api de longa duração:
 Após cadastrar um novo usuário;
 abra o terminal: 
-- php artisan tinker ;
-
+```bash
+php artisan tinker ;
+```
+```bash
 $user = User::first();
-
+```
+```bash
 $user->createToken('api-access');
-
+```
 Salve o campo
 
 +plainTextToken: "1|d0DNHRTLfn9Fp87qYWenEYbF9gTwns5ycVeIchOb",
@@ -62,32 +71,27 @@ Salve o campo
 - DELETE    | api/vendedores/batch       | vendedores.batchDestroy
 - POST      | api/vendedores/search      | vendedores.search          
 
-GET|HEAD  | api/vendedores/{vendedore} | vendedores.show 
-PUT|PATCH | api/vendedores/{vendedore} | vendedores.update
-DELETE    | api/vendedores/{vendedore} | vendedores.destroy 
+- GET|HEAD  | api/vendedores/{vendedore} | vendedores.show 
+- PUT|PATCH | api/vendedores/{vendedore} | vendedores.update
+- DELETE    | api/vendedores/{vendedore} | vendedores.destroy 
 
 ## Crud Vendedor
 
-## Crud Cadastro
+- [Crud vendedor](http://ramonmerces.xyz/cadastro-vendedor)
+- 
+## Crud Chamado
+
+- [Crud Chamado](http://ramonmerces.xyz/crud-chamado)
+-
 
 ## Soluções
+
+Ao fazer [login](http://ramonmerces.xyz/login) 
+- Usuario; 
+- Senha:
 
 ### Chamados Atrasados
 
 Existe uma rotina no scheduller do Laravel verificando a cada 5 minutos os chamados abertos e quando foram criados, caso a data de criação seja maior que 24hrs o status do chamado é alterado para Atrasado;
 
 ### Chamados distribuidos para o consultor com menos chamados em aberto
-
-
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
