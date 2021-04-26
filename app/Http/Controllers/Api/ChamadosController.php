@@ -9,6 +9,7 @@ use App\Models\Chamado;
 use App\Models\Vendedor;
 use Illuminate\Http\Request;
 use Auth;
+use Redirect;
 
 class ChamadosController extends Controller
 {
@@ -36,21 +37,63 @@ class ChamadosController extends Controller
             $chamado->save();
             
         }
-        return view('crud-chamado');
+        return Redirect::to('/crud-chamado');
    }
    public function updateView(Request $request){
         if(!empty($request)){
             $input = $request->all();
             $chamado = Chamado::find($input['id']);
-            $chamado->assunto = $input['assunto'];
-            $chamado->descricao = $input['descricao'];
-            $chamado->status = $input['status'];
+            if(!empty($input['assunto'])){
+                $chamado->assunto = $input['assunto'];
+            }
+            if(!empty($input['descricao'])){
+                $chamado->descricao = $input['descricao'];
+            }
+            if(!empty($input['status'])){
+            
+                $vendedor = Vendedor::find($chamado->vendedor_id);
+                if(!empty($vendedor)){
+                    switch ($chamado->status) {
+                        case "Aberto":
+                            $vendedor->chamados_abertos--;
+                            break;
+                        case "Atrasado":
+                            $vendedor->chamados_abertos--;
+                            break;
+                        case "Atendimento":
+                            $vendedor->chamados_em_atendimento--;
+                            break;
+                        case "Resolvido":
+                            $vendedor->chamados_resolvidos--;
+                            break;    
+                    }
+                    switch ($input['status']) {
+                        case "Aberto":
+                            $vendedor->chamados_abertos++;
+                            break;
+                        case "Atrasado":
+                            $vendedor->chamados_abertos++;
+                            break;
+                        case "Atendimento":
+                            $vendedor->chamados_em_atendimento++;
+                            break;
+                        case "Resolvido":
+                            $vendedor->chamados_resolvidos++;
+                            break;    
+                    }
+                    $chamado->status = $input['status'];
+                    $vendedor->save();
+                }
+                
+            }
+            if(!empty($input['created_at'])){
             $chamado->created_at = $input['created_at'];
+            }
             $chamado->save();
 
 
         }
-        return view('crud-chamado');
+        return Redirect::to('/crud-chamado');
    }
    public function deleteView(Request $request){
         if(!empty($request)){
@@ -77,7 +120,7 @@ class ChamadosController extends Controller
             $chamado->delete();
             
         }
-        return view('crud-chamado'); 
+        return Redirect::to('/crud-chamado'); 
    }    
    public function atrasados(){
     $d1 = new \DateTime();
@@ -93,7 +136,11 @@ class ChamadosController extends Controller
         }
     
    }
+   public function meusChamados($id){
+      
+       return view('meus-chamados')->with(['id' => $id]);
 
+   }
 
     protected $model = Chamado::class; 
     public function resolveUser()

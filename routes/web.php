@@ -32,6 +32,7 @@ Route::get('/crud-chamado', function (){
 Route::get('/meus-chamados', function (){
     return view('meus-chamados');
 });
+Route::get('/meus-chamados/{id}', 'App\Http\Controllers\Api\ChamadosController@meusChamados');
 Route::get('/atrasados', 'App\Http\Controllers\Api\ChamadosController@atrasados' );
 
 Auth::routes();

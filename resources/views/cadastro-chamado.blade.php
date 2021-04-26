@@ -2,6 +2,8 @@
 @extends('layouts.app')
 
 @section('content')
+<?php $vendedores = Vendedor::All()->count(); ?>
+
 <style>
 body {
     color: #566787;
@@ -76,7 +78,22 @@ button.btn {
 }
 </style>
 
+@if($vendedores == '0')
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>Nenhum vendedor encontrado cadastre um vendedor e tente novamente</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+@else                
 <div class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
@@ -105,5 +122,5 @@ button.btn {
         </div>
     </div>
 </div>
-
+@endif
 @endsection

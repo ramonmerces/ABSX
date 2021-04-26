@@ -25,7 +25,7 @@ body {
 
 .table-title {
     padding-bottom: 15px;
-    background: #435d7d;
+    background: #2368f1;
     color: #fff;
     padding: 16px 30px;
     min-width: 100%;

@@ -8,6 +8,7 @@ use Orion\Concerns\DisableAuthorization;
 use App\Models\Vendedor;
 use Illuminate\Http\Request;
 use Auth;
+use Redirect;
 
 class VendedoresController extends Controller
 {
@@ -29,7 +30,7 @@ class VendedoresController extends Controller
        $vendedor->chamados_resolvidos = 0;
 
        $vendedor->save();
-       return view('cadastro-vendedor');
+       return Redirect::to('/cadastro-vendedor');
     }
     public function updateview(Request $request)
     {
@@ -47,8 +48,9 @@ class VendedoresController extends Controller
             $vendedor->save();
             
         
-        return view('cadastro-vendedor');
+        
         }
+        return Redirect::to('/cadastro-vendedor');
     }
 
     public function deleteView(Request $request)
@@ -59,7 +61,7 @@ class VendedoresController extends Controller
             $vendedor->delete();
             
         }
-        return view('cadastro-vendedor');
+        return Redirect::to('/cadastro-vendedor');
     }
     
     

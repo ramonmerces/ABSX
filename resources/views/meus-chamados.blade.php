@@ -28,7 +28,7 @@ body {
 
 .table-title {
     padding-bottom: 15px;
-    background: #435d7d;
+    background: #2368f1;
     color: #fff;
     padding: 16px 30px;
     min-width: 100%;
@@ -296,7 +296,8 @@ jQuery(document).ready(function() {
                 </thead>
                 <tbody>
                     <?php
-                   $chamados = Chamado::all();
+                   
+                  $chamados = Chamado::where('vendedor_id',  $id)->get();
                    if (!empty($chamados)){
                        foreach ($chamados as $chamado){
                            echo ("<tr>
@@ -333,6 +334,7 @@ jQuery(document).ready(function() {
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                    <input type="hiden" name="id" id="id_form" class="form-control" required>
                         <label>Status:</label>
                         <select  class="form-control" id="id_status" name="status" required>
                         <option value="Aberto">Aberto</option>

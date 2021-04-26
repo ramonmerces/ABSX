@@ -1,8 +1,10 @@
-<?php use App\Models\Chamado;?>
+<?php use App\Models\Chamado;
+use App\Models\Vendedor;?>
 @extends('layouts.app')
 
 @section('content')
 @if (@auth::check())
+<?php $vendedores = Vendedor::All()->count(); ?>
 <style>
 body {
     color: #566787;
@@ -25,7 +27,7 @@ body {
 
 .table-title {
     padding-bottom: 15px;
-    background: #435d7d;
+    background: #2368f1;
     color: #fff;
     padding: 16px 30px;
     min-width: 100%;
@@ -375,7 +377,32 @@ jQuery(document).ready(function() {
         </div>
     </div>
 </div>
-<!-- Edit Modal HTML -->
+@if($vendedores == '0')
+
+<div id="addChamadoModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/post-chamado" method="POST">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <div class="modal-header">
+                    <h4 class="modal-title">Nenhum Vendedor encontrado, cadastre um vendedor e tente novamente</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    
+                    </div>
+        </div>
+                <div class="modal-footer">
+                   
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+         
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@else   
+
 <div id="addChamadoModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -404,6 +431,7 @@ jQuery(document).ready(function() {
         </div>
     </div>
 </div>
+@endif
 <!-- Edit Modal HTML -->
 <div id="editChamadoModal" class="modal fade">
     <div class="modal-dialog">
