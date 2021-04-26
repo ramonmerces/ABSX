@@ -5,10 +5,10 @@
 - Base de dados MySql;
 
 ## Tecnologias utilizadas
-Laravel 8
-Laravel Orion - Criação de api Rest
-Laravel UI
-Laravel Sanctum - Auth
+- Laravel 8
+- Laravel Orion - Criação de api Rest
+- Laravel UI
+- Laravel Sanctum - Auth
 
 
 ## Autenticação
