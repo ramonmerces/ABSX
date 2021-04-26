@@ -31,9 +31,10 @@ php artisan key:generate;
 php artisan migrate;
 ```
 
-Para utilizar Rest é necessario gerar um token-api de longa duração:
-Após cadastrar um novo usuário;
-abra o terminal: 
+- Para utilizar Rest é necessario gerar um token-api de longa duração:
+- Após cadastrar um novo usuário;
+- abra o bash: 
+
 ```bash
 php artisan tinker ;
 ```
@@ -43,11 +44,13 @@ $user = User::first();
 ```bash
 $user->createToken('api-access');
 ```
-Salve o campo
+-Salve o campo:
 
+```bash
 +plainTextToken: "1|d0DNHRTLfn9Fp87qYWenEYbF9gTwns5ycVeIchOb",
-
-- 1|d0DNHRTLfn9Fp87qYWenEYbF9gTwns5ycVeIchOb este é o bearer token que deve ser enviado para as rotas de API
+```
+- 1|d0DNHRTLfn9Fp87qYWenEYbF9gTwns5ycVeIchOb 
+- este é o bearer token que deve ser enviado para as rotas de API
 
 ## Rotas API rest (autenticadas para acesso externo via Bearer token)
 
@@ -90,11 +93,16 @@ Ao fazer [login](http://ramonmerces.xyz/login)
 - Senha: absx1234
 
 Existem 3 cards representam os cruds de chamados e vendedores e outro apresenta a visão sem auth para cadastro externo de chamados.
+Para visualizar os comando no scheduller execute o comando
 
+```bash
+php artisan schedule:list
+```
 ### Chamados Atrasados
 
 Existe uma rotina no scheduller do Laravel verificando a cada 5 minutos os chamados abertos e quando foram criados, caso a data de criação seja maior que 24hrs o status do chamado é alterado para Atrasado.
+O tempo pode ser modificado de acordo com a sensibilidade deste atributo:
 
-### Chamados distribuidos para o consultor com menos chamados em aberto
+### Chamados distribuidos para o consultor com menor quantidade de chamados Abertos
 
 Ao criar um novo chamado atribui-se a ao consultor com menos chamados em aberto.
