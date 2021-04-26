@@ -89,7 +89,7 @@ $user->createToken('api-access');
 ## Soluções
 
 Ao fazer [login](http://ramonmerces.xyz/login) 
-- Usuario; joao.absx@mailinator.com
+- Usuario; absx.suporte@mailinator.com
 - Senha: absx1234
 
 Existem 3 cards representam os cruds de chamados e vendedores e outro apresenta a visão sem auth para cadastro externo de chamados.
